@@ -19,7 +19,7 @@ MERCADO_PAGO_SUCCESS_URL = os.getenv("MERCADO_PAGO_SUCCESS_URL", "http://localho
 MERCADO_PAGO_FAILURE_URL = os.getenv("MERCADO_PAGO_FAILURE_URL", "http://localhost:5173/")
 MERCADO_PAGO_PENDING_URL = os.getenv("MERCADO_PAGO_PENDING_URL", "http://localhost:5173/")
 MERCADO_PAGO_NOTIFY_URL = os.getenv("MERCADO_PAGO_NOTIFY_URL", "")
-ITEM_PRICE = 15000
+ITEM_PRICE = 1500
 
 
 def get_mercado_pago_sdk() -> mercadopago.SDK:
