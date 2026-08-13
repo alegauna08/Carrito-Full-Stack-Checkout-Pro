@@ -19,7 +19,7 @@ MERCADO_PAGO_SUCCESS_URL = os.getenv("MERCADO_PAGO_SUCCESS_URL", "http://localho
 MERCADO_PAGO_FAILURE_URL = os.getenv("MERCADO_PAGO_FAILURE_URL", "http://localhost:5173/")
 MERCADO_PAGO_PENDING_URL = os.getenv("MERCADO_PAGO_PENDING_URL", "http://localhost:5173/")
 MERCADO_PAGO_NOTIFY_URL = os.getenv("MERCADO_PAGO_NOTIFY_URL", "")
-ITEM_PRICE = 15.0
+ITEM_PRICE = 15000
 
 
 def get_mercado_pago_sdk() -> mercadopago.SDK:
@@ -32,10 +32,17 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Habilitar CORS para desarrollo (ajustar orígenes en producción)
+# Habilitar CORS: por defecto permite todo en desarrollo,
+# pero puede configurarse vía la variable de entorno ALLOW_ORIGINS
+ALLOW_ORIGINS_ENV = os.getenv("ALLOW_ORIGINS", "").strip()
+if ALLOW_ORIGINS_ENV:
+    ALLOW_ORIGINS = [o.strip() for o in ALLOW_ORIGINS_ENV.split(",") if o.strip()]
+else:
+    ALLOW_ORIGINS = ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOW_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

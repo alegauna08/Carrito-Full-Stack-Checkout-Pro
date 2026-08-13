@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: backend-music-api
+    env: python
+    region: oregon
+    repo: "alegauna08/Carrito-Full-Stack-Checkout-Pro"
+    branch: main
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ALLOW_ORIGINS
+        value: "https://tu-frontend.vercel.app,http://localhost:5173"
